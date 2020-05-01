@@ -3,83 +3,57 @@
 {% block title %} Funcionários {% endblock %}
 
 {%block main%}
-<script>
-    $(document).ready(function(){
-      var cargos = document.getElementById("data").getAttribute("var_cargos");
-      $("#btnNovo").click(function(){
-          if(cargos > 0){
-            alert("Produto passado: " + cargos + ".... já pode chamar a tela de incluir funcionário.");
-          }else{
-            $("#modalMensagem").modal();
 
-          }
-        
-      });
-    });
-    </script>
-Dentro da página de listar funcionários.<br>
-funcionários cadastrados:-> {{funcionarios|length}} <br>
-Cargos cadastrados: -> {{cargos}}
+
 <br><br>
 <div id="data" var_cargos="{{cargos}}" >
 
 </div>
-<table class="table" >
-    <thead class="thead-light" >
-        <tr>
-            <th scope="col" >Código</th>
-            <th scope="col">Nome do funcionário</th>
-            <th scope="col">cargo</th>
-        </tr>
+<table class="table table-hover table-sm" >
+    <tr  >
+        <th scope="col" style="width: 100px;" >Código</th>
+        <th scope="col">Nome do funcionário</th>
+        <th scope="col" style="text-align: center;" >Cargo</th>
+        <th scope="col" style="text-align: center; width: 200px; " >Ativo</th>
+        <th scope="col" colspan="2" style="text-align: center;" > Ações </th>
+    </tr>
+    
 
-    </thead>
-        {% if funcionarios %}
-            {% for func in funcionarios %}
-                <tbody>
-                <tr scope="row" style="width: 20px;" >{{func.id}}</tr>
-                <tr scope="row">{{func.nome}}</tr>
-                <tr scope="row">{{func.cargo.nome_cargo}}</tr>
-            </tbody>
-            {% endfor %}
-        {%else%}
-            <tbody>
-            <tr>
-                <th scope="row" >
-                    <td>{{v_erro}}</td>
-                </th>
-            </tr>
-        </tbody>
-        {% endif %}
+    {% if object_list %}
+        {% for func in object_list %}
+                <tr > 
+                  <td >{{func.id}}</td> 
+                  <td id="txtnomefunc" >{{func.nome}}</td> 
+                  <td id="txtcargo" style="text-align: left;" >{{func.cargo.nome_cargo}}</td> 
+                  {% if func.inativo %}
+                    <td id="txtstatus" style="text-align: center;" >
+                        <i class="material-icons" style="color: red;" >check</i>
+                    </td>
+                  {% else %}
+                    <td id="txtstatus" style="text-align: center;" >
+                        <i class="material-icons" style="color: green;" >check</i>
+                    </td>
+                  {% endif %}
+                  <td><a href="{% url 'alterarFuncionario' func.id %}" class="btn btn-info btn-sml active teste-list" > Editar</a></td>
+                  <td><a href="#" class="btn btn-warning btn-sml active teste-list"
+                    data-toogle="modal" data-target="#exampleModal"
+                    > Excluir</a></td>
+
+</tr>
+        {% endfor %}
+    {%else%}
+        <tr>
+            <th scope="row" >
+                <td>'Nenhum funcionário cadastrado!xxx'</td>
+            </th>
+        </tr>
+    {% endif %}
 </table>
 
 
 <br><br>
-<button type="button" class="btn btn-default btn-lg" id="btnNovo">Login</button>
-<a 
-
->Incluir</a>                  <a href="{% url 'index' %}" >Home</a>
-
-<div class="modal fade" id="modalMensagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Não existem cargos cadastrados. Primeiro você deve cadastrar um cargo para poder cadastrar um funcionário.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <a href="{% url 'incluirFuncionario' %}" class="btn btn-primary btn-sml active" 
-           role="button" aria-pressed="true">Incluir Funcionários</a>   
-        </div>
-      </div>
-    </div>
-  </div>
-
+<a href="{% url 'incluirFuncionario' %}"  class="btn btn-primary" >Incluir</a><br>
+<a href="{% url 'index' %}" >Home</a>
 
     {% endblock %}
 

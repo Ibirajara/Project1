@@ -1,20 +1,27 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from cargo.models import Cargo
 from .models import Funcionario
-from .forms import funcForm
+from funcionario.forms import FuncForm
+from django.views.generic import ( ListView, UpdateView, CreateView )
 
-def listarFuncionarios(request):
-    cargos = Cargo.objects.count()
-    funcionarios = Funcionario.objects.all()
-    verr = 'Não existem funcionários cadastrados!'
-    return render(request, 'listarfuncionarios.html', {'funcionarios': funcionarios, 'v_erro': verr, 'cargos': cargos})
+class ListarFuncionarioView(ListView):
+    model = Funcionario
+    template_name = 'listarfuncionarios.html'
 
-def incluirFuncionario(request):
-    return render(request, 'mensagemincluircargo.html')
-    '''
-    form = funcForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('listarFuncionarios')
-    return render(request, 'salvarfuncionario.html', {'form': form})'''
+#Alterar funcionário ** Não existe a possibilidade de se excluir um funcionário. O ideal é torná-lo inativo
+class AlterarFuncionarioView(UpdateView):
+    model = Funcionario
+    template_name = 'salvarFuncionario2.html'
+    form_class = FuncForm
+    success_url = reverse_lazy('listarFuncionarios')
+
+class IncluirFuncionarioView(CreateView):
+    model = Funcionario
+    template_name = 'salvarfuncionario2.html'
+    form_class = FuncForm
+    success_url = reverse_lazy('listarFuncionarios')
+
+
+
 

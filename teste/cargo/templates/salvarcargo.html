@@ -8,9 +8,9 @@
 <h4>Dentro da tela de cadastro de cargos.</h4>
 <form method="POST" >
     {% csrf_token %}
-    {{form.nome_cargo|bootstrap_horizontal:'col-sm-1' }}<br>
-    {{form.descricao|bootstrap}}<br>
-    {{form.salario|bootstrap}}<br>
+    {{object.nome_cargo}}<br>
+    {{object.descricao}}<br>
+    {{object.salario}}<br>
     
     <button type="submit" >Salvar</button><br>
     <a href="{% url 'index' %}" >Home</a>

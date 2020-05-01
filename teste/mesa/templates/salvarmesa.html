@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %} {% endblock %}
+
+{% block main %}
+<form method="POST" >
+{% csrf_token %}
+
+<div  class="row" >
+
+    <div class="col" style="width: 100px;" >{{form.numero|bootstrap }}</div>
+    <div class="col" style="width: auto;" >{{form.tipo_mesa|bootstrap}}</div>
+</div>
+<div class="row">
+    <div class="col" style="width: 400px;" >{{form.num_registro|bootstrap}}</div><br>
+    <div class="col" style="width: 400px;">{{form.data_cadastro|bootstrap}}</div><br>
+
+</div>
+<button type="submit" > Salvar </button> 
+<a href="{% url 'listarMesas' %}" >Voltar</a>
+</div>
+
+
+
+</form>
+{% endblock %}

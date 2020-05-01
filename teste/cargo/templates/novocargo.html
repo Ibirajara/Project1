@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+{% block title %} Cargos {% endblock %}
+
+
+{% block main %}
+
+<form method="POST" >
+    {% csrf_token %}
+    <div id="form" class="form-group" >
+        <div style="width: 600px;" >{{form.nome_cargo|bootstrap }}</div><br>
+        <div style="width: auto;" >{{form.descricao|bootstrap}}</div><br>
+        <div style="width: 400px;" >{{form.salario|bootstrap}}</div><br>
+        <input type="text" class="campo_moeda" ><br>
+    </div>
+    <button type="submit" >Salvar</button><br>
+    <a href="{% url 'index' %}" >Home</a>
+</form>
+
+{% endblock %}

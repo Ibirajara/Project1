@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %} Exclusão de cargo {% endblock %}
+
+
+{% block main %}
+
+<form method="POST" >
+    {% csrf_token %}
+   
+    <div class="container">
+      <h2>Atenção!</h2>
+      <div class="panel panel-default" style="height: 400px; width: 800px; border: 1px solid cornflowerblue; ">
+        <div class="panel-heading">Excluir cargo</div>
+        <div class="panel-body" style="height: 100px;" >
+          <label>Confirma a exclusão do cargo {{object.nome_cargo}} ?</label>
+        </div>
+      </div>
+    </div>
+
+
+<br>
+
+    <button class="btn btn-warning btn-sml active" style="margin-right: 200px;" type="submit" >Confirmar</button>
+    <a class="btn btn-info btn-sml active" href="{% url 'listarCargos' %}" >cancelar</a>
+</form>
+
+{% endblock %}

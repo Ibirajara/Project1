@@ -1,8 +1,12 @@
 from django.forms import ModelForm
-from .models import Funcionario
+from funcionario.models import Funcionario
 
 
-class funcForm(ModelForm):
+class FuncForm(ModelForm):
     class Meta:
         model = Funcionario
-        fields = [ 'nome', 'cpf', 'cargo', 'inativo', 'nascimento' ]
+        fields = [ 'nome', 'cpf', 'telefone', 'cargo', 'nascimento', 'saldo', 'inativo' ]
+        
+
+
+        #''', 'telefone',  'cargo', 'nascimento', 'saldo', 'inativo'

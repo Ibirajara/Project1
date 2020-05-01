@@ -18,9 +18,13 @@ from django.urls import path, include
 from . import views
 from cargo import urls as cargoUrls
 from funcionario import urls as funcUrls
+from mesa import urls as mesaUrls
+from teste.views import Inicio
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', views.index, name='index' ),
+    path('', Inicio.as_view()),
+    path('index/', Inicio.as_view(), name='index' ),
     path('cargo/', include(cargoUrls) ),
     path('funcionario/', include(funcUrls)),
+    path('mesa/', include(mesaUrls) ),
 ]

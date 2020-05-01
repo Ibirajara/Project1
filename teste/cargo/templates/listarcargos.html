@@ -3,39 +3,56 @@
 {% block title %} Cargos {% endblock %}
 
 {%block main%}
-Dentro da página de listar cargos.<br>
-cargos cadastrados:-> {{cargos|length}}
-<br><br>
-<table class="table" >
-    <thead class="thead-light" >
-        <tr>
-            <th scope="col" >Código</th>
-            <th scope="col">Nome do cargo</th>
-            <th scope="col">Salário</th>
-        </tr>
+<script>
 
-    </thead>
-        {% if cargos %}
-            {% for cargo in cargos %}
-                <tbody>
-                <tr scope="row" style="width: 20px;" >{{cargo.id}}</tr>
-                <tr scope="row">{{cargo.nome_cargo}}</tr>
-                <tr scope="row">{{cargo.salario}}</tr>
-            </tbody>
+  function dadosModal(cargo){
+    alert(cargo);
+    cargo1 = "{{cargo}}";
+    var texto = document.getElementById("txtnomecargo").innerText
+    document.getElementById("meutexto").innerHTML = "Deseja realmente excluir o cargo " + cargo1.nome_cargo + "?" ;
+  }
+</script>
+<div class="alert alert-dark text-center " role="alert" style="margin-top: 10px;" >
+<label >Cargos</label>
+</div>
+<table class="table table-hover table-sm" >
+        <tr  >
+            <th scope="col" style="width: 100px;" >Código</th>
+            <th scope="col">Nome do cargo</th>
+            <th scope="col" style="text-align: center;" >Descrição</th>
+            <th scope="col" style="text-align: center; width: 200px; " >Salário</th>
+            <th scope="col" colspan="2" style="text-align: center;" > Ações </th>
+        </tr>
+        
+
+        {% if object_list %}
+            {% for cargo in object_list %}
+                    <tr > 
+                      <td >{{cargo.id}}</td> 
+                      <td id="txtnomecargo" >{{cargo.nome_cargo}}</td> 
+                      <td id="txtdesccargo" style="text-align: left;" >{{cargo.descricao}}</td> 
+                      <td style="text-align: right;" >{{cargo.salario}}</td> 
+                      <td><a href="{% url 'alterarCargo' cargo.id %}" class="btn btn-info btn-sml active teste-list" > Editar</a></td>
+                      <td><a href="{% url 'excluirCargo' cargo.id %}" class="btn btn-warning btn-sml active teste-list"
+                        data-toogle="modal" data-target="#exampleModal"
+                        > Excluir</a></td>
+   
+</tr>
             {% endfor %}
         {%else%}
-            <tbody>
             <tr>
                 <th scope="row" >
-                    <td>{{v_erro}}</td>
+                    <td>'Nenhum cargo cadastrado!xxx'</td>
                 </th>
             </tr>
-        </tbody>
         {% endif %}
 </table>
-
-
 <br><br>
-<a href="{% url 'incluirCargo' %}" >Incluir</a>                  <a href="{% url 'index' %}" >Home</a>
-    {% endblock %}
+<div id="footer" >
+  <a href="{% url 'criarCargo' %}"  class="btn btn-primary" >Incluir</a>
+  <a class="btn btn-secondary"  href="{% url 'index' %}" >Home</a>
+</div>
+
+
+{% endblock %}
 

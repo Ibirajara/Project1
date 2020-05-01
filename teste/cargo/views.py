@@ -1,16 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.urls import reverse_lazy
 from .models import Cargo
-from .forms import cargoForm
+from .forms import CargoForm
+from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView, View, RedirectView )
 
-def listarCargos(request):
-    cargos = Cargo.objects.all()
-    verr = 'Não existem cargos cadastrados!'
-    return render(request, 'listarcargos.html', {'cargos': cargos, 'v_erro': verr} )
 
+class ListarCargosViews(ListView):
+    model = Cargo
+    template_name = 'listarcargos.html'
+
+class CriarCargoView(CreateView):
+    model = Cargo
+    template_name = 'novocargo.html'
+    form_class = CargoForm 
+    success_url = reverse_lazy('listarCargos')
+
+class AlterarCargoViews(UpdateView):
+    model = Cargo
+    template_name='novocargo.html'
+    form_class = CargoForm
+    success_url = reverse_lazy('listarCargos')
+
+class ExcluirCargoView(DeleteView):
+    model = Cargo
+    template_name = 'deleteconfirm.html'
+    success_url = reverse_lazy('listarCargos')
     
-def incluirCargo(request):
-    form = cargoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('listarCargos')
-    return render(request, 'salvarcargo.html', {'form': form})
+
+
+

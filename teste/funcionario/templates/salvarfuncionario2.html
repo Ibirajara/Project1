@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block main %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group" >
+            {{form.nome|bootstrap}}
+
+        </div>
+        <div class="form-row" >
+            <div class="col" > {{form.cargo|bootstrap}} </div>
+            <div class="col" > {{form.cpf|bootstrap}} </div>
+            <div class="col" > {{form.telefone|bootstrap}} </div>
+        </div>
+        <div class="form-row" >
+            <div class="col" > {{form.nascimento|bootstrap}} </div>
+            <div class="col"> {{form.saldo|bootstrap}} </div>
+            <div class="col"></div>
+        </div>
+        <div>
+            <div class="col form-check" >
+                <div class="mt-4 ml-auto" > {{form.inativo|bootstrap}} </div>
+            </div>
+        </div>
+        
+
+        <button type="submit" >Salvar</button>
+    </form>
+<br><br>
+<a href="{% url 'incluirFuncionario' %}" >Incluir</a>                     <a href="{% url 'index' %}" >Home</a>
+{% endblock %}
