@@ -8,12 +8,10 @@ class Funcionario(models.Model):
     cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Cargo' )
     nascimento = models.DateField(verbose_name='Nascimento', blank=True, null=True )
     saldo = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Saldo', default=0)
+
     inativo = models.BooleanField(default=False, verbose_name='Inativo')
-    data_cadastro = models.DateField(auto_now_add=timezone.now , editable=False, blank=True )
-
-
-
-
+    data_cadastro = models.DateField(auto_now_add=timezone.now , editable=False, blank=True)
+    
 
     def __str__(self):
         return self.nome, self.id

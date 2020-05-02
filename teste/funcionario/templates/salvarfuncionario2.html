@@ -1,21 +1,36 @@
 {% extends 'base.html' %}
-{% load bootstrap %}
+{% load bootstrap widget_tweaks %}
 
 {% block main %}
     <form method="POST">
         {% csrf_token %}
         <div class="form-group" >
-            {{form.nome|bootstrap}}
-
+            {{form.nome.label_tag}}
+            {% render_field form.cpf class='form-control' %}
         </div>
         <div class="form-row" >
-            <div class="col" > {{form.cargo|bootstrap}} </div>
-            <div class="col" > {{form.cpf|bootstrap}} </div>
-            <div class="col" > {{form.telefone|bootstrap}} </div>
+            <div class="col" > 
+                {{form.cargo.label_tag}} 
+                {% render_field form.cargo class='form-control' %}    
+            </div>
+            <div class="col" > 
+                {{form.cpf.label_tag}} 
+                {% render_field form.cpf class='form-control cpf' %}
+            </div>
+            <div class="col" >
+                 {{form.telefone.label_tag}} 
+                 {% render_field form.telefone class='form-control' %}
+            </div>
         </div>
         <div class="form-row" >
-            <div class="col" > {{form.nascimento|bootstrap}} </div>
-            <div class="col"> {{form.saldo|bootstrap}} </div>
+            <div class="col" >
+                 {{form.nascimento.label_tag}} 
+                 {% render_field form.nascimento class='form-control data_picker' %}
+            </div>
+            <div class="col">
+                {{form.saldo.label_tag  }}
+                {% render_field form.saldo class='form-control numeric campo_moeda' %}
+            </div>
             <div class="col"></div>
         </div>
         <div>
