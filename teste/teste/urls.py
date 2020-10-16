@@ -15,16 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from teste import views
 from cargo import urls as cargoUrls
 from funcionario import urls as funcUrls
 from mesa import urls as mesaUrls
-from teste.views import Inicio
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Inicio.as_view()),
-    path('index/', Inicio.as_view(), name='index' ),
+    path('', views.Inicio.as_view()),
+    path('index/', views.Inicio.as_view(), name='index' ),
     path('cargo/', include(cargoUrls) ),
     path('funcionario/', include(funcUrls)),
     path('mesa/', include(mesaUrls) ),
+    path('login/', views.login_user, name='login' ),
+    path('logout/', views.logout_view, name='logout'),
+    path('login/submit', views.login_submit ),
 ]

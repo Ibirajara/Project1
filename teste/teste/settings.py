@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'cargo',
     'funcionario',
     'mesa',
+    'empresa',
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -126,5 +128,8 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     'statics',
-    'statics/js',
+]
+
+DATE_INPUT_FORMATS = [
+    '%d/%m/%Y', '%d-%m-%Y',         # '05/05/2020', '05-05-2020'
 ]

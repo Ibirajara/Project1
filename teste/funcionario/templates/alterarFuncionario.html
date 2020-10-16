@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load bootstrap widget_tweaks %}
+
+{% block main %}
+Olá... {{request.session.nome1}}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group" >
+            {{form.nome.label_tag}}
+            {% render_field form.nome class='form-control' %}
+        </div>
+        <div class="form-row" >
+            <div class="col" > 
+                {{form.cargo.label_tag}} 
+                {% render_field form.cargo class='form-control' %}    
+            </div>
+            <div class="col" > 
+                {{form.cpf.label_tag}} 
+                {% render_field form.cpf class='form-control cpf' %}
+            </div>
+            <div class="col" >
+                 {{form.telefone.label_tag}} 
+                 {% render_field form.telefone class='form-control' %}
+            </div>
+        </div>
+        <div class="form-row" >
+            <div class="col" >
+                 {{form.nascimento.label_tag}} 
+                 {% render_field form.nascimento class='form-control date_mask' %}
+            </div>
+            <div class="col">
+                {{form.saldo.label_tag  }}
+                {% render_field form.saldo class='form-control numeric campo_moeda' %}
+            </div>
+            <div class="col"></div>
+        </div>
+        <div>
+            <div class="col form-check" >
+                <div class="mt-4 ml-auto" > {{form.inativo|bootstrap}} </div>
+            </div>
+        </div>
+        {% if form.errors %}
+            {% for error in form.errors %}
+                <div class="alert alert-primary" >{{ form.nascimento.errors }}</div>
+            {% endfor %}
+        {% endif %}
+        
+
+        <button type="submit" >Salvar</button>
+    </form>
+<br><br>
+                    <a href="{% url 'listarFuncionarios' %}" >Voltar</a>
+{% endblock %}

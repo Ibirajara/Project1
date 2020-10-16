@@ -1,12 +1,8 @@
-from django.forms import ModelForm
+from django import forms
 from funcionario.models import Funcionario
 
-
-class FuncForm(ModelForm):
+class FuncForm(forms.ModelForm):
     class Meta:
         model = Funcionario
-        fields = [ 'nome', 'cpf', 'telefone', 'cargo', 'nascimento', 'saldo', 'inativo' ]
-        
-
-
-        #''', 'telefone',  'cargo', 'nascimento', 'saldo', 'inativo'
+        fields = [ 'nome', 'cpf', 'telefone', 'cargo', 'nascimento', 'saldo', 'inativo', 'empresa' ]
+        widgets = {'empresa': forms.HiddenInput() }
